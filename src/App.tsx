@@ -4,11 +4,17 @@ import { Link, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 const days = new Array(25).fill(null).map((_, index) => {
   const number = String(index + 1).padStart(2, '0');
 
-  const url = new URL(`./solutions/Day${number}.tsx`, import.meta.url);
+  const url = new URL(
+    `./solutions/${number}/Day${number}.tsx`,
+    import.meta.url
+  );
+
   const module =
     url.pathname === '/undefined'
       ? null
-      : React.lazy(async () => await import(`./solutions/Day${number}.tsx`));
+      : React.lazy(
+          async () => await import(`./solutions/${number}/Day${number}.tsx`)
+        );
 
   return {
     number,
