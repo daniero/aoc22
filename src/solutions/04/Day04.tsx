@@ -17,13 +17,19 @@ function solvePart1(input: string): number {
     .reduce((sum, b) => (b ? sum + 1 : sum), 0);
 }
 
+function solvePart2(input: string): number {
+  return parseInput(input)
+    .map(([a, b, c, d]) => (a <= c && b >= c) || (c <= a && d >= a))
+    .reduce((sum, b) => (b ? sum + 1 : sum), 0);
+}
+
 export default function Day04(): JSX.Element {
   const [input, setInput] = useState(sampleInput);
   const [answer, setAnswer] = useState<number | null>(null);
 
   return (
     <>
-      <h1>Day 3: Rucksack Reorganization</h1>
+      <h1>Day 4: Camp Cleanup</h1>
 
       <div className={design.solution}>
         <div>
@@ -40,6 +46,7 @@ export default function Day04(): JSX.Element {
         </div>
         <div>
           <button onClick={() => setAnswer(solvePart1(input))}>Part 1</button>
+          <button onClick={() => setAnswer(solvePart2(input))}>Part 2</button>
           {answer !== null && <pre>{JSON.stringify(answer, undefined, 2)}</pre>}
         </div>
       </div>
