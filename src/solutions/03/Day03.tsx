@@ -12,11 +12,33 @@ function priority(c: string): number {
 
 function solvePart1(input: string): any {
   return input
+    .trim()
     .split('\n')
     .flatMap((line) => {
       const a = [...line.substring(0, line.length / 2)];
       const b = [...line.substring(line.length / 2)];
       return [...new Set(a)].filter((c) => b.includes(c));
+    })
+    .map(priority)
+    .reduce((a, b) => a + b, 0);
+}
+
+function solvePart2(input: string): number {
+  return input
+    .trim()
+    .split('\n')
+    .reduce((chunks: string[][], line, i) => {
+      if (i % 3 === 0) {
+        const newChunk = [line];
+        return [...chunks, newChunk];
+      }
+      const prevChunks = chunks.slice(0, -1);
+      const currChunk = chunks.slice(-1)[0];
+
+      return [...prevChunks, [...currChunk, line]];
+    }, [])
+    .flatMap(([a, b, c]) => {
+      return [...new Set(a)].filter((x) => b.includes(x) && c.includes(x));
     })
     .map(priority)
     .reduce((a, b) => a + b, 0);
@@ -45,6 +67,7 @@ export default function Day03(): JSX.Element {
         </div>
         <div>
           <button onClick={() => setAnswer(solvePart1(input))}>Part 1</button>
+          <button onClick={() => setAnswer(solvePart2(input))}>Part 2</button>
           {answer !== null && <pre>{JSON.stringify(answer, undefined, 2)}</pre>}
         </div>
       </div>
