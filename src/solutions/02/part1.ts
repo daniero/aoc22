@@ -1,6 +1,7 @@
-import { Move, PAPER, parseInput, play, ROCK, SCISSORS, Weapon } from './input';
+import { Input, parseInput } from './input';
+import { PAPER, ROCK, SCISSORS, score, Weapon } from './game';
 
-const moves: Record<Move, Weapon> = {
+const moves: Record<Input, Weapon> = {
   A: ROCK,
   B: PAPER,
   C: SCISSORS,
@@ -16,9 +17,7 @@ export function solvePart1(input: string): number {
     const myMove = moves[me];
     const opponentMove = moves[opponent];
 
-    const result = play(myMove, opponentMove);
-
-    return result * 3 + myMove + 1;
+    return score(myMove, opponentMove);
   });
 
   return rounds.reduce((a, b) => a + b, 0);

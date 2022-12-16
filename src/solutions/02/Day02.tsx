@@ -1,15 +1,12 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import design from './design.module.css';
 import sampleInput from './sample-input.txt?raw';
 import { solvePart1 } from './part1';
+import { solvePart2 } from './part2';
 
 export default function Day02(): JSX.Element {
   const [input, setInput] = useState(sampleInput);
-  const [answer, setAnswer] = useState<any>(null);
-
-  useEffect(() => {
-    solvePart1(input);
-  }, [input]);
+  const [answer, setAnswer] = useState<number | null>(null);
 
   return (
     <>
@@ -30,6 +27,7 @@ export default function Day02(): JSX.Element {
         </div>
         <div>
           <button onClick={() => setAnswer(solvePart1(input))}>Part 1</button>
+          <button onClick={() => setAnswer(solvePart2(input))}>Part 2</button>
           {answer !== null && <pre>{JSON.stringify(answer, undefined, 2)}</pre>}
         </div>
       </div>
