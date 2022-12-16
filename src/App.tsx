@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink, Outlet, Route, Routes } from 'react-router-dom';
+import css from './App.module.scss';
 
 const days = new Array(25).fill(null).map((_, index) => {
   const number = String(index + 1).padStart(2, '0');
@@ -50,27 +51,34 @@ function App(): JSX.Element {
 
 function Layout(): JSX.Element {
   return (
-    <>
-      <header>
-        <Link to="/">AoC-22</Link>
-      </header>
-      <nav>
-        <ul>
-          {days.map((day, i) => (
-            <li key={day.number}>
-              {day.module != null ? (
-                <NavLink to={day.number}>{day.number}</NavLink>
-              ) : (
-                <span>{day.number}</span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <div className={css.layout}>
+      <div className={css.top}>
+        <header>
+          <Link to="/">AoC-22</Link>
+        </header>
+        <nav>
+          <ul className={css.dayList}>
+            {days.map((day, i) => (
+              <li key={day.number}>
+                {day.module != null ? (
+                  <NavLink
+                    to={day.number}
+                    className={({ isActive }) => (isActive ? css.active : '')}
+                  >
+                    {day.number}
+                  </NavLink>
+                ) : (
+                  <span>{day.number}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
       <main>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 }
 

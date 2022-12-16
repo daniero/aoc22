@@ -1,0 +1,38 @@
+.layout {
+  font-family: sans-serif;
+}
+
+.top {
+  display: flex;
+  gap: 20px;
+
+  a {
+    color: dodgerblue;
+    padding: 6px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.active {
+      background-color: cornflowerblue;
+      color: white;
+    }
+  }
+}
+
+.dayList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    float: left;
+    margin-left: 10px;
+
+    span {
+      color: #777;
+    }
+  }
+}
